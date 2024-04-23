@@ -4,14 +4,14 @@ import json
 
 # Jira server credentials
 jira_url = 'https://nightvision.atlassian.net/'
-username = 'alex@nightvision.net'
-assignee_username = 'alex@nightvision.net'
-api_token = os.environ['JIRA_API_TOKEN']
+jira_username = 'alex@nightvision.net'
+assignee_jira_username = 'alex@nightvision.net'
+jira_api_token = os.environ['JIRA_API_TOKEN']
 project_id = 10004
 component_name = 'Readme Doc'
 
 # Connect to Jira
-jira = JIRA(basic_auth=(username, api_token), options={'server': jira_url})
+jira = JIRA(basic_auth=(jira_username, jira_api_token), options={'server': jira_url})
 
 # List all components available in the project
 components = jira.project_components(str(project_id))
@@ -37,14 +37,15 @@ for run in sarif_data['runs']:
         issue_dict = {
             'project': {'id': project_id},
             'summary': result['message']['text'],
+            # 'summary': rule_id, # can use for a more specific title
             'description': description,
             'issuetype': {'name': 'Bug'},
             'components': [{'id': component_id}],
         }
 
         # only if issues cannot be unassigned
-        if assignee_username:
-            issue_dict['assignee'] = {'name': assignee_username}
+        if assignee_jira_username:
+            issue_dict['assignee'] = {'name': assignee_jira_username}
 
         # Create the issue
         new_issue = jira.create_issue(fields=issue_dict)
