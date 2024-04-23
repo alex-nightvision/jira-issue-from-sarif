@@ -1,0 +1,36 @@
+components: {}
+info:
+  title: remediation-demo
+  version: "0.1"
+openapi: 3.0.0
+paths:
+  /.env:
+    get:
+      operationId: .env_GET
+      responses:
+        default:
+          description: Default response
+      x-name: .env_GET
+      x-source: app.py~~46
+    x-name: .env
+  /users:
+    get:
+      operationId: users_GET
+      parameters:
+      - in: query
+        name: name
+        schema:
+          type: string
+          x-field-kind: normal
+          x-field-original-type: builtin.str
+          x-field-type: string
+        x-category: query parameter
+      responses:
+        default:
+          description: Default response
+      x-name: users_GET
+      x-source: app.py~~25
+    x-name: users
+servers:
+- description: Default server
+  url: http://127.0.0.1:5000
