@@ -29,8 +29,8 @@ This repository automates the process of creating Jira tickets based on vulnerab
 
 1. **Clone the repository:**
    ```sh
-   git clone <repository-url>
-   cd <repository-directory>
+   git clone https://github.com/alex-nightvision/jira-issue-from-sarif.git
+   cd jira-issue-from-sarif
    ```
 
 2. **Install required packages:**
